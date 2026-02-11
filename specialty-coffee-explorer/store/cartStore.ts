@@ -2,18 +2,22 @@
 import { create } from 'zustand';
 import { CoffeeBean } from '@/lib/data';
 
-// ① Storeの型定義（JavaのInterfaceのようなもの）
 type CartStore = {
-  cart: CoffeeBean[]; // カートの中身（配列）
-  addToCart: (bean: CoffeeBean) => void; // カートに追加する関数
+  cart: CoffeeBean[];
+  addToCart: (bean: CoffeeBean) => void;
+  removeFromCart: (index: number) => void; // 👈 削除機能を追加
+  clearCart: () => void;                   // 👈 全クリア機能を追加
 };
 
-// ② Storeの作成（シングルトンインスタンスの生成）
 export const useCartStore = create<CartStore>((set) => ({
-  cart: [], // 初期値は空の配列
+  cart: [],
+  addToCart: (bean) => set((state) => ({ cart: [...state.cart, bean] })),
   
-  // 既存のカート状態（state.cart）を展開し、新しい豆（bean）を末尾に追加する
-  addToCart: (bean) => set((state) => ({ 
-    cart: [...state.cart, bean] 
+  // 指定されたインデックスの商品だけを取り除く
+  removeFromCart: (index) => set((state) => ({
+    cart: state.cart.filter((_, i) => i !== index)
   })),
+  
+  // カートを空の配列に戻す
+  clearCart: () => set({ cart: [] }),
 }));

@@ -36,8 +36,7 @@ export default async function Home({
               <p>📍 産地: {bean.origin}</p>
               <p>🔥 焙煎: {bean.roast}</p>
             </div>
-            <p className="text-amber-700 font-bold mt-4 text-lg">¥{bean.price}</p>
-            
+<p className="text-amber-700 font-bold mt-4 text-lg">¥{bean.price.toLocaleString()}</p>            
             <div className="mt-4 flex flex-wrap gap-2">
               {bean.flavorNotes.map((note) => (
                 <span key={note} className="bg-amber-100 text-amber-800 text-xs px-2 py-1 rounded-full">
