@@ -1,4 +1,5 @@
 // src/app/products/[id]/page.tsx
+import Image from "next/image";
 import { mockCoffeeBeans } from "@/lib/data";
 import AddToCartButton from "@/components/AddToCartButton";
 import Link from "next/link";
@@ -30,9 +31,15 @@ export default async function ProductDetailPage({
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-10 bg-white p-8 rounded-2xl shadow-sm">
         
-        {/* 左側：商品画像（今回はプレースホルダー） */}
-        <div className="bg-stone-100 rounded-xl h-80 flex items-center justify-center text-6xl text-stone-300">
-          ☕
+        {/* 左側：商品画像 */}
+        <div className="relative h-80 w-full rounded-xl overflow-hidden bg-gray-100">
+          <Image
+            src={bean.imageUrl}
+            alt={bean.name}
+            fill
+            className="object-cover"
+            priority // 詳細ページはすぐに表示したいので優先読み込み
+          />
         </div>
 
         {/* 右側：商品情報 */}
