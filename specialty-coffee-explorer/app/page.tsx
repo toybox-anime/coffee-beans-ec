@@ -29,7 +29,11 @@ export default async function Home({
             key={bean.id}
             className="border border-amber-200 p-5 rounded-xl shadow-sm hover:shadow-md transition"
           >
-            <h2 className="text-xl font-bold text-gray-800">{bean.name}</h2>
+            <Link href={`/products/${bean.id}`}>
+              <h2 className="text-xl font-bold text-gray-800 hover:text-amber-600 transition cursor-pointer underline decoration-amber-200 underline-offset-4">
+                {bean.name}
+              </h2>
+            </Link>
 
             <div className="text-sm text-gray-600 mt-2 space-y-1">
               <p>📍 産地: {bean.origin}</p>
