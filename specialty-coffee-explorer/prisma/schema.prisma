@@ -5,14 +5,14 @@ generator client {
 }
 
 datasource db {
-  provider = "sqlite"
+  provider = "postgresql"
   url      = env("DATABASE_URL")
 }
 
 // ① 注文テーブル
 model Order {
   id          String      @id @default(cuid()) // ランダムな一意のIDを自動生成
-  totalAmount Int         // 合計金額
+  totalAmount Int // 合計金額
   status      String      @default("COMPLETED")
   createdAt   DateTime    @default(now())
   // OrderItemとの1対多のリレーション
@@ -21,11 +21,11 @@ model Order {
 
 // ② 注文明細テーブル
 model OrderItem {
-  id        String @id @default(cuid())
-  orderId   String
-  beanId    String // コーヒー豆のID
-  beanName  String // コーヒー豆の名前
-  price     Int    // 購入時の価格
+  id       String @id @default(cuid())
+  orderId  String
+  beanId   String // コーヒー豆のID
+  beanName String // コーヒー豆の名前
+  price    Int // 購入時の価格
   // Orderとのリレーション設定
-  order     Order  @relation(fields: [orderId], references: [id])
+  order    Order  @relation(fields: [orderId], references: [id])
 }
