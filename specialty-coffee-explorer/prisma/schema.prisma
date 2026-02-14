@@ -1,0 +1,31 @@
+// prisma/schema.prisma
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+// ① 注文テーブル
+model Order {
+  id          String      @id @default(cuid()) // ランダムな一意のIDを自動生成
+  totalAmount Int         // 合計金額
+  status      String      @default("COMPLETED")
+  createdAt   DateTime    @default(now())
+  // OrderItemとの1対多のリレーション
+  items       OrderItem[]
+}
+
+// ② 注文明細テーブル
+model OrderItem {
+  id        String @id @default(cuid())
+  orderId   String
+  beanId    String // コーヒー豆のID
+  beanName  String // コーヒー豆の名前
+  price     Int    // 購入時の価格
+  // Orderとのリレーション設定
+  order     Order  @relation(fields: [orderId], references: [id])
+}
