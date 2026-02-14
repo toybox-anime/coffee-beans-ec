@@ -1,5 +1,4 @@
 import { z } from 'zod';
-import { CoffeeBean } from './data';
 
 // ✅ CoffeeBean のバリデーションスキーマ
 export const CoffeeBeanSchema = z.object({

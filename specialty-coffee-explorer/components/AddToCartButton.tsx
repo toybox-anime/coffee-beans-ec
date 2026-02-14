@@ -9,12 +9,8 @@ export default function AddToCartButton({ bean }: { bean: CoffeeBean }) {
   const addToCart = useCartStore((state) => state.addToCart);
 
   const handleAddToCart = () => {
-    try {
-      addToCart(bean);
-      toast.success(`${bean.name}をカートに追加しました！`);
-    } catch (error) {
-      toast.error("カートへの追加に失敗しました");
-    }
+    addToCart(bean);
+    toast.success(`${bean.name}をカートに追加しました！`);
   };
 
   return (
