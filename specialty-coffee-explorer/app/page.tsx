@@ -1,4 +1,5 @@
 // src/app/page.tsx
+import Link from "next/link"; 
 import { mockCoffeeBeans } from '@/lib/data';
 import Search from '@/components/Search';
 import AddToCartButton from '@/components/AddToCartButton';
