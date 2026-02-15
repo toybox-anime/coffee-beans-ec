@@ -27,3 +27,7 @@ Java/Scala エンジニアとしての設計思想を、TypeScript のエコシ�
 1. 依存関係のインストール: `npm install`
 2. データベース同期: `npx prisma db push`
 3. 開発サーバー起動: `npm run dev`
+
+![alt text][def]
+
+[def]: image.png
