@@ -2,7 +2,7 @@
 "use client";
 
 import { useCartStore } from "@/store/cartStore";
-import { CoffeeBean } from "@/lib/data";
+import { CoffeeBean } from "@/lib/types";
 import toast from "react-hot-toast";
 
 export default function AddToCartButton({ bean }: { bean: CoffeeBean }) {

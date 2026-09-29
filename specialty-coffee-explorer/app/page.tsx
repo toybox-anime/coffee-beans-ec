@@ -1,19 +1,20 @@
-"use client";
-
-import { useState } from "react";
-import { mockCoffeeBeans } from "@/lib/data";
+import { Suspense } from "react";
 import Link from "next/link";
-import Image from "next/image"; // 👈 これが画像を表示するための部品です
+import Image from "next/image";
 import AddToCartButton from "@/components/AddToCartButton";
+import Search from "@/components/Search";
+import { getProducts } from "@/lib/products";
 
-export default function Home() {
-  // 検索用のキーワード（状態）
-  const [searchQuery, setSearchQuery] = useState("");
+// 商品はDBから取得するため、リクエストごとに描画する
+export const dynamic = "force-dynamic";
 
-  // 検索キーワードで商品を絞り込む処理
-  const filteredBeans = mockCoffeeBeans.filter((bean) =>
-    bean.name.includes(searchQuery)
-  );
+export default async function Home({
+  searchParams,
+}: {
+  searchParams: Promise<{ q?: string }>;
+}) {
+  const { q } = await searchParams;
+  const filteredBeans = await getProducts(q);
 
   return (
     <main className="p-10 max-w-5xl mx-auto min-h-screen">
@@ -22,14 +23,10 @@ export default function Home() {
       </h1>
 
       {/* 検索ボックスエリア */}
-      <div className="mb-10 text-center">
-        <input
-          type="text"
-          placeholder="コーヒー豆を検索..."
-          value={searchQuery}
-          onChange={(e) => setSearchQuery(e.target.value)}
-          className="border-2 border-amber-200 rounded-full px-6 py-3 w-full max-w-md focus:outline-none focus:border-amber-500 transition shadow-sm"
-        />
+      <div className="mb-10 flex justify-center">
+        <Suspense>
+          <Search />
+        </Suspense>
       </div>
 
       {/* 商品一覧エリア */}
