@@ -31,6 +31,7 @@ Java/Scala エンジニアとしての設計思想を、TypeScript のエコシ�
 - `store/`: グローバルな状態管理
 
 ## 🚀 ローカル開発手順
+0. （Vercel では `npm run build` 時に db push とシードが自動実行されます）
 1. 依存関係のインストール: `npm install`
 2. `.env` に `DATABASE_URL`（Neon などの PostgreSQL 接続文字列）を設定
 3. データベース同期: `npm run db:push`
