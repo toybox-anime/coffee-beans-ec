@@ -1,6 +1,6 @@
 // src/store/cartStore.ts
 import { create } from 'zustand';
-import { CoffeeBean } from '@/lib/data';
+import { CoffeeBean } from '@/lib/types';
 
 type CartStore = {
   cart: CoffeeBean[];

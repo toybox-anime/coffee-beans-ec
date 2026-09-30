@@ -1,9 +1,12 @@
 // src/app/products/[id]/page.tsx
 import Image from "next/image";
-import { mockCoffeeBeans } from "@/lib/data";
+import { getProductById } from "@/lib/products";
 import AddToCartButton from "@/components/AddToCartButton";
 import Link from "next/link";
 import { notFound } from "next/navigation";
+
+// 商品はDBから取得するため、リクエストごとに描画する
+export const dynamic = "force-dynamic";
 
 // Next.jsのルール：params は Promise型として受け取ります（v15以降）
 export default async function ProductDetailPage({
@@ -14,8 +17,8 @@ export default async function ProductDetailPage({
   // URLの { id } を取得
   const { id } = await params;
 
-  // データの中から、IDが一致するコーヒー豆を探す
-  const bean = mockCoffeeBeans.find((b) => b.id === id);
+  // DBから、IDが一致するコーヒー豆を探す
+  const bean = await getProductById(id);
 
   // もし豆が見つからなかったら、404ページを表示する
   if (!bean) {
@@ -69,9 +72,8 @@ export default async function ProductDetailPage({
           </div>
 
           <p className="text-gray-600 leading-relaxed mb-8">
-            {bean.origin}産の厳選された豆を使用。
-            {bean.roast}ならではの香ばしさと、{bean.flavorNotes.join('、')}のような風味が特徴の一杯です。
-            朝の目覚めや、午後のリラックスタイムに最適です。
+            {bean.description ??
+              `${bean.origin}産の${bean.roast}。${bean.flavorNotes.join("、")}のような風味が特徴の一杯です。`}
           </p>
 
           {/* カートに追加ボタン（再利用！） */}

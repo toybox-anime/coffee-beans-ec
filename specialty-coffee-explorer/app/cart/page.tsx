@@ -19,7 +19,7 @@ export default function CartPage() {
     const toastId = toast.loading("決済処理中...");
 
     try {
-      const result = await processCheckout(cart, totalPrice);
+      const result = await processCheckout(cart.map((bean) => bean.id));
 
       if (result.success) {
         toast.dismiss(toastId);

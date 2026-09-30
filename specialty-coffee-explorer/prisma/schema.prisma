@@ -29,3 +29,16 @@ model OrderItem {
   // Orderとのリレーション設定
   order    Order  @relation(fields: [orderId], references: [id])
 }
+
+// ③ 商品テーブル（以前は lib/data.ts のモックだったもの）
+model Product {
+  id          String   @id @default(cuid())
+  name        String
+  price       Int
+  origin      String
+  roast       String
+  flavorNotes String[]
+  imageUrl    String
+  description String?
+  createdAt   DateTime @default(now())
+}
