@@ -38,6 +38,4 @@ Java/Scala エンジニアとしての設計思想を、TypeScript のエコシ�
 4. 商品の初期データ投入: `npm run db:seed`
 5. 開発サーバー起動: `npm run dev`
 
-![alt text][def]
-
-[def]: image.png
+![商品一覧](../docs/images/list.png)
